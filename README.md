@@ -2,6 +2,7 @@
 ## Setup
 ### Docker toolbox
 Download Docker toolbox and install (check download Git & Install virtual box NDISS driver - If have error => don't check driver NDISS)
+
 => link error fix sang docker for desktop: https://stackoverflow.com/questions/36885985/cannot-start-docker-after-installation-on-windows
 ### Docker for desktop
 
@@ -32,8 +33,8 @@ If you don't have GitBash, please download it.
  - ```docker create -ti ubuntu bash``` create container without run. Status of container will be "Created" (view in ```docker ps -a```)
  - ```docker start/stop/restart -ai 8b16398778a0``` start/stop/restart docker by dockerId "8b16398778a0" (dockerId get from ```docker ps -a```)
  - ``` docker cp ebook.txt pensive_lovelace:/root/ebook.txt``` copy file ebook.txt to docker by name "pensive_lovelace" (dockerName get from ```docker ps```)
- -```docker inspect 688030a8b8ba | grep IPAddr``` get information like: network, driver, ip... => return json ("| grep IPAddr" is optional for search "IPAddr")
- -```docker rm containerNameOrId``` remove docker container by name or Id, Note: Make sure container is stopped.
+- ```docker inspect 688030a8b8ba | grep IPAddr``` get information like: network, driver, ip... => return json ("| grep IPAddr" is optional for search "IPAddr"). 
+- ```docker rm containerNameOrId``` remove docker container by name or Id, Note: Make sure container is stopped.
 - ```docker ps``` show containers are running.
 - ```docker ps -a``` show containers are running and stopped.
 - ```docker ps -l``` show container has just stopped.
