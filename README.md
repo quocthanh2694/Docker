@@ -22,12 +22,22 @@ If you don't have GitBash, please download it.
 # Run (Powershell on win 10)
 # Commands in Docker
 - ```docker images``` show all images in docker
-- ```docker run -ti hello-world``` for test docker
+- ```docker run -ti --rm hello-world sleep 3``` for test docker (--rm: remove container after stop; sleep 3: after 3 seconds container will auto exit)
+- ```docker run -ti ubuntu bash -c "sleep 3; echo job finished" --rm``` sleep 3 seconds and print text.
+- ```docker run -ti -d ubuntu bash``` run ubuntu background and go back to docker.
+
+- ```docker attach container_name_or_id``` go inside container by name or id "container_name_or_id`" (container_name get from ```docker ps```).
+- ``` docker exec -ti compassionate_mccarthy bash``` go inside container parallel with ```docker attach container_name_or_id``` by name "compassionate_mccarthy". When main process exit => this exec will be exit.
+
+ - ```docker create -ti ubuntu bash``` create container without run. Status of container will be "Created" (view in ```docker ps -a```)
+ - ```docker start/stop/restart -ai 8b16398778a0``` start/stop/restart docker by dockerId "8b16398778a0" (dockerId get from ```docker ps -a```)
+ - ``` docker cp ebook.txt pensive_lovelace:/root/ebook.txt``` copy file ebook.txt to docker by name "pensive_lovelace" (dockerName get from ```docker ps```)
+ -```docker inspect 688030a8b8ba | grep IPAddr``` get information like: network, driver, ip... => return json ("| grep IPAddr" is optional for search "IPAddr")
+ -```docker rm containerNameOrId``` remove docker container by name or Id, Note: Make sure container is stopped.
 - ```docker ps``` show containers are running.
 - ```docker ps -a``` show containers are running and stopped.
 - ```docker ps -l``` show container has just stopped.
 - ```docker run --network=host -ti ubuntu:16.04 bash``` run ubuntu as bash (like git bash)
-- ```Ctrl + C or Ctrl + D``` to exit.
 - ```docker commit container_id``` to create image from container by container id (container id get from ```docker ps -a```)
 - ```docker tag 6440eb149adb ubuntu_new``` rename 'ubuntu_new' for imageId '6440eb149adb' (imageId get from ```docker images```)
 - ```docker commit f65fa7938c08 ubuntu_2``` create image from container id with name 'ubuntu_2'.
@@ -35,9 +45,11 @@ If you don't have GitBash, please download it.
 
 # Commands in LINUX:
  - ```pwd``` check current path in linux are staging
- - ```cat /etc/lsb-release``` get current system information. 
+ - ```cat /etc/lsb-release``` or ```cat /etc/*-release``` get current system information. 
  - ```exit``` exit ubuntu.
  - ```touch file_name``` create new file with name "file_name". 
+ - ```Ctrl + C or Ctrl + D``` to exit and stop container.
+ - ```Ctrl + P / Ctrl + Q``` to exit container but keep container running.
  
  # Return code 
  (Docker website have list of exit code)
