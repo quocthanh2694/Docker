@@ -21,6 +21,7 @@ If you don't have GitBash, please download it.
 - Container Independence: Docker container do not save anything in image. It's only save inside container while it's running
 - Avoid container get dependence when start. Make sure get dependence from inside container => avoid host dependence die.
 - Don't let impotant files in container stoped and have no name. Done work for a long time on a container have no name and not back up data because you will remove container is stopped for save hard disk or clean trash. => Usually let Name for container and back up files.
+- Docker hub search registry: https://hub.docker.com/ 
 
 ## Connect container together
 ### Way 1: connect via host
@@ -60,8 +61,26 @@ If you don't have GitBash, please download it.
 - ```docker run --network=host -ti ubuntu:16.04 bash``` run ubuntu as bash (like git bash)
 - ```docker commit container_id``` to create image from container by container id (container id get from ```docker ps -a```)
 - ```docker tag 6440eb149adb ubuntu_new``` rename 'ubuntu_new' for imageId '6440eb149adb' (imageId get from ```docker images```)
-- ```docker commit f65fa7938c08 ubuntu_2``` create image from container id with name 'ubuntu_2'.
+- ```docker commit f65fa7938c08 ubuntu_2:v1.0``` create image from container id with name 'ubuntu_2' and tag version "v1.0" (version default will be "latest"). Name structure: registry.repo.com:port/organization/image-name:version-tag (registry.repo.com:port is OPTIONAL)
+- ```docker run --memory="198m"``` limit memory 256mb
 
+- ```docker pull debian:latest``` pull newest debian
+- ```docker tag debian:latest quocthanh2694/image-1:v1.0``` create name for image prepare for push
+- ```docker push  quocthanh2694/image-1:v1.0``` push on docker hub quocthanh2694
+IMAGES:
+- ```docker rmi image_name image_name -f``` remove multiple images by name (-f: force)
+- ```docker save -o backup-images.tar.gz debian:latest custom-centos``` back multiple images (debian:latest,  custom-centos) with name:version. "o" mean output.
+- ```docker load -i backup-images.tar.gz``` load backup images.
+VOLUMN: 
+Share data container and host (you can exit container without lose files shared)
+- ```docker run -ti -v C:\Users\admin/host_data:/container_data ubuntu bash``` : "-v" mean volumn. "C:\Users\admin/host_data" folder host; "/container_data" folder share data inside unbutu.
+Share data between container. (exit all container will be lose any files in shared folder)
+- ``` docker run -ti --name pc1 -v /share ubuntu bash``` run pc1 with folder share inside ubuntu.
+- ```echo data > /share/data_file``` create new file with data.
+- ``` docker run -ti --name pc2 --volumes-from pc1 ubuntu bash``` run pc2 with volumes from pc1 => with folder "/share" from pc1.
+- => pc1 and pc2 are use the same sharing folder name: share.
+- Stop pc1 and start pc3 also volumes to pc2 => get the same file and folder in share folder.
+- If stop pc3 and pc2 (stop all pc have share folder) => share folder will be destroy.
 
 # Commands in LINUX:
  - ```pwd``` check current path in linux are staging
@@ -71,6 +90,8 @@ If you don't have GitBash, please download it.
  - ```Ctrl + C or Ctrl + D``` to exit and stop container.
  - ```Ctrl + P / Ctrl + Q``` to exit container but keep container running.
  - ```cat /etc/hosts``` 
+ - ```df -h``` print information about disk and storage.
+ - ```echo data > /share/data_file``` create file with name "data_file" in folder share and have content: data.
  
  # Return code 
  (Docker website have list of exit code)
