@@ -5,7 +5,10 @@ Download Docker toolbox and install (check download Git & Install virtual box ND
 
 => link error fix sang docker for desktop: https://stackoverflow.com/questions/36885985/cannot-start-docker-after-installation-on-windows
 ### Docker for desktop
-
+- Check versions:
+- docker -v
+- docker-compose -v
+- docker-machine -v
 1. Install Docker Community Edition (not Docker Toolbox)
 2. Enable Hyper-V
 Open Control Panel -> System and Security -> Programs (left panel) -> Turn Windows features on or off -> Check the Hyper-V box
@@ -106,6 +109,9 @@ RUN apt-get install nano
 CMD ["/bin/nano","/text/dummy"]
 ```
 
+NGINX:
+- ```docker run -d -p 8081:80 --name webservere3 nginx``` run nginx port 8081 (on browser need to get ip from ipconfig like: http://192.168.56.1:8081/)
+- ```docker run --name ng -d -P nginx``` run nginx on random port
 # Commands in LINUX:
  - ```pwd``` check current path in linux are staging
  - ```cat /etc/lsb-release``` or ```cat /etc/*-release``` get current system information. 
