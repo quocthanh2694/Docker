@@ -67,13 +67,17 @@ If you don't have GitBash, please download it.
 - ```docker pull debian:latest``` pull newest debian
 - ```docker tag debian:latest quocthanh2694/image-1:v1.0``` create name for image prepare for push
 - ```docker push  quocthanh2694/image-1:v1.0``` push on docker hub quocthanh2694
+
 IMAGES:
-- ```docker rmi image_name image_name -f``` remove multiple images by name (-f: force)
+- ```docker rmi image_name:version image_name -f``` remove multiple images by name:version (-f: force)
 - ```docker save -o backup-images.tar.gz debian:latest custom-centos``` back multiple images (debian:latest,  custom-centos) with name:version. "o" mean output.
 - ```docker load -i backup-images.tar.gz``` load backup images.
+
 VOLUMN: 
+
 Share data container and host (you can exit container without lose files shared)
 - ```docker run -ti -v C:\Users\admin/host_data:/container_data ubuntu bash``` : "-v" mean volumn. "C:\Users\admin/host_data" folder host; "/container_data" folder share data inside unbutu.
+
 Share data between container. (exit all container will be lose any files in shared folder)
 - ``` docker run -ti --name pc1 -v /share ubuntu bash``` run pc1 with folder share inside ubuntu.
 - ```echo data > /share/data_file``` create new file with data.
@@ -81,6 +85,26 @@ Share data between container. (exit all container will be lose any files in shar
 - => pc1 and pc2 are use the same sharing folder name: share.
 - Stop pc1 and start pc3 also volumes to pc2 => get the same file and folder in share folder.
 - If stop pc3 and pc2 (stop all pc have share folder) => share folder will be destroy.
+
+
+DOCKER FILE
+
+Ex1: Build hello world Dockerfile
+- create folder example, cd to example folder and create file "Dockerfile" (Capital "D") with content
+```FROM busybox
+RUN echo "This is the most basic Dockerfile."
+CMD echo "Welcome on board."
+```
+- ```docker build -t basic . ``` build image name "basic" from Dockerfile. ( -t: tag, ". end of command mean current folder have Dockerfile")
+- ``` docker run --rm basic ``` => You will see text "Welcome on board.".
+
+Ex2: install and run command exc Dockerfile
+- Content of Dockerfile: 
+```FROM debian:sid
+RUN apt-get -y update
+RUN apt-get install nano
+CMD ["/bin/nano","/text/dummy"]
+```
 
 # Commands in LINUX:
  - ```pwd``` check current path in linux are staging
