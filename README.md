@@ -116,7 +116,8 @@ NGINX:
 MYSQL:
 - Note: MAKE SURE you Switched to Linux Container.
 - ```docker network create mysql``` create a network name "mysql" for container connect together
-- ```docker run --name learn_mysql5 -p 3303:3306 --network mysql -v /xx:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -d mysql:5.7``` Run mysql (port 3303)
+- (1) ```docker run --name learn_mysql5 -p 3303:3306 --network mysql -v /xx:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -d mysql:5.7``` Run mysql (port 3303)
+- (1) or you can run only mysql like ``` docker run --name learn_mysql6 -p 3302:3306  -e MYSQL_ROOT_PASSWORD=123 -d mysql:5.7```
 - ```docker run --name myadmin1 -d --network mysql -p 8084:80 -e PMA_HOST=learn_mysql1 phpmyadmin/phpmyadmin``` Run mysql phpmyadmin connect to mysql. (http://localhost:8084)
 
 # Commands in LINUX:
