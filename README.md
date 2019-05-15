@@ -112,6 +112,13 @@ CMD ["/bin/nano","/text/dummy"]
 NGINX:
 - ```docker run -d -p 8081:80 --name webservere3 nginx``` run nginx port 8081 (on browser need to get ip from ipconfig like: http://192.168.56.1:8081/)
 - ```docker run --name ng -d -P nginx``` run nginx on random port
+
+MYSQL:
+- Note: MAKE SURE you Switched to Linux Container.
+- ```docker network create mysql``` create a network name "mysql" for container connect together
+- ```docker run --name learn_mysql5 -p 3303:3306 --network mysql -v /xx:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123 -d mysql:5.7``` Run mysql (port 3303)
+- ```docker run --name myadmin1 -d --network mysql -p 8084:80 -e PMA_HOST=learn_mysql1 phpmyadmin/phpmyadmin``` Run mysql phpmyadmin connect to mysql. (http://localhost:8084)
+
 # Commands in LINUX:
  - ```pwd``` check current path in linux are staging
  - ```cat /etc/lsb-release``` or ```cat /etc/*-release``` get current system information. 
