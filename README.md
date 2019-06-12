@@ -51,6 +51,7 @@ If you don't have GitBash, please download it.
 - ```docker attach container_name_or_id``` go inside container by name or id "container_name_or_id`" (container_name get from ```docker ps```).
 - ```docker logs app``` show log of container. "app" is the name of container.
 - ``` docker exec -ti compassionate_mccarthy bash``` go inside container parallel with ```docker attach container_name_or_id``` by name "compassionate_mccarthy". When main process exit => this exec will be exit.
+- ``` docker exec -it <container name> /bin/bash ``` attach to terminal linux in container.
 
  - ```docker create -ti ubuntu bash``` create container without run. Status of container will be "Created" (view in ```docker ps -a```)
  - ```docker start/stop/restart -ai 8b16398778a0``` start/stop/restart docker by dockerId "8b16398778a0" (dockerId get from ```docker ps -a```)
